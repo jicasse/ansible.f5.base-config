@@ -207,20 +207,18 @@ Change this variable to True if you want to defined the security logging level.
 
 This variable is dictionary containing the security level you want to configure per daemon or BIGIP topic.
 Here is the default content of this dictionary :
-`
- - { db_key: 'log.arp.level', level: 'Warning' }
- - { db_key: 'log.http.level', level: 'Error' }
- - { db_key: 'log.deflate.level', level: 'Error' }
- - { db_key: 'log.ip.level', level: 'Warning' }
- - { db_key: 'log.layer4.level', level: 'Notice' }
- - { db_key: 'log.mcpd.level', level: 'info' }
- - { db_key: 'log.net.level', level: 'Warning' }
- - { db_key: 'log.rules.level', level: 'Informational' }
- - { db_key: 'log.ssl.level', level: 'Warning' }
- - { db_key: 'log.tmm.level', level: 'Notice' }
- - { db_key: 'log.lind.level', level: 'Notice' }
- - { db_key: 'log.csyncd.level', level: 'Notice' }
- `
+> - { db_key: 'log.arp.level', level: 'Warning' }
+> - { db_key: 'log.http.level', level: 'Error' }
+> - { db_key: 'log.deflate.level', level: 'Error' }
+> - { db_key: 'log.ip.level', level: 'Warning' }
+> - { db_key: 'log.layer4.level', level: 'Notice' }
+> - { db_key: 'log.mcpd.level', level: 'info' }
+> - { db_key: 'log.net.level', level: 'Warning' }
+> - { db_key: 'log.rules.level', level: 'Informational' }
+> - { db_key: 'log.ssl.level', level: 'Warning' }
+> - { db_key: 'log.tmm.level', level: 'Notice' }
+> - { db_key: 'log.lind.level', level: 'Notice' }
+> - { db_key: 'log.csyncd.level', level: 'Notice' }
 
 This is our recommended configuration for these logging levels.
 
