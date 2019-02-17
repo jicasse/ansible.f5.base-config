@@ -206,8 +206,9 @@ Change this variable to True if you want to defined the security logging level.
 > f5_syslog_logging_levels:
 
 This variable is dictionary containing the security level you want to configure per daemon or BIGIP topic.
-Here is the default content of this dictionary : 
-` - { db_key: 'log.arp.level', level: 'Warning' }
+Here is the default content of this dictionary :
+`
+ - { db_key: 'log.arp.level', level: 'Warning' }
  - { db_key: 'log.http.level', level: 'Error' }
  - { db_key: 'log.deflate.level', level: 'Error' }
  - { db_key: 'log.ip.level', level: 'Warning' }
@@ -218,7 +219,8 @@ Here is the default content of this dictionary :
  - { db_key: 'log.ssl.level', level: 'Warning' }
  - { db_key: 'log.tmm.level', level: 'Notice' }
  - { db_key: 'log.lind.level', level: 'Notice' }
- - { db_key: 'log.csyncd.level', level: 'Notice' }`
+ - { db_key: 'log.csyncd.level', level: 'Notice' }
+ `
 
 This is our recommended configuration for these logging levels.
 
@@ -248,6 +250,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: bigip1
       roles:
+         - ansible.f5.get-ha-status
          - ansible.f5.hardening
 
 Please remember you need to define a requirements.yml file containing the source information for the role.
