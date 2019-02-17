@@ -207,6 +207,7 @@ Change this variable to True if you want to defined the security logging level.
 
 This variable is dictionary containing the security level you want to configure per daemon or BIGIP topic.
 Here is the default content of this dictionary :
+
      - { db_key: 'log.arp.level', level: 'Warning' }
      - { db_key: 'log.http.level', level: 'Error' }
      - { db_key: 'log.deflate.level', level: 'Error' }
