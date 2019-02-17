@@ -1,0 +1,25 @@
+galaxy_info:
+  author: Jimmy Casse 
+  description: Ansible role for F5 bigip base configuration
+  company: J-SEC
+
+  license: license BSD
+
+  min_ansible_version: 2.7
+
+  platforms:
+   - name: EL
+     versions:
+     - all
+   - name: Debian
+     versions:
+     - all
+  galaxy_tags:
+   - f5
+   - bigip
+   - networking
+   - security
+   - hardening
+
+dependencies: 
+ - jicasse.ansible_f5_get_ha_status

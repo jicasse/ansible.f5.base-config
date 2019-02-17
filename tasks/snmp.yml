@@ -1,0 +1,114 @@
+---
+- name: Set snmp contact
+  bigip_snmp:
+   contact: "{{ f5_snmp_contact }}"
+   password: "{{ f5_passwd }}"
+   server: "{{ f5_host }}"
+   user: "{{ f5_user }}"
+   validate_certs: "{{ f5_validate_certs }}"
+  delegate_to: "{{ f5_delegate_to }}"
+  when: (f5_snmp_contact is defined) and
+        (f5_snmp_contact | length) > 0
+  tags: set_snmp
+  notify: config sync
+
+- name: Set snmp location
+  bigip_snmp:
+   location: "{{ f5_snmp_location }}"
+   password: "{{ f5_passwd }}"
+   server: "{{ f5_host }}"
+   user: "{{ f5_user }}"
+   validate_certs: "{{ f5_validate_certs }}"
+  delegate_to: "{{ f5_delegate_to }}"
+  when: (f5_snmp_location is defined) and
+        (f5_snmp_location | length) > 0
+  tags: set_snmp
+  notify: config sync
+
+- name: Set snmp allowed addresses
+  bigip_snmp:
+   allowed_addresses: "{{ f5_snmp_allowed_addresses }}"
+   password: "{{ f5_passwd }}"
+   server: "{{ f5_host }}"
+   user: "{{ f5_user }}"
+   validate_certs: "{{ f5_validate_certs }}"
+  delegate_to: "{{ f5_delegate_to }}"
+  when: (f5_snmp_allowed_addresses is defined) and
+        (f5_snmp_allowed_addresses | length) > 0
+  tags: set_snmp
+  notify: config sync
+
+- name: Set snmp agent authentication traps
+  bigip_snmp:
+   agent_authentication_traps: "{{ f5_snmp_agent_authentication_traps }}"
+   password: "{{ f5_passwd }}"
+   server: "{{ f5_host }}"
+   user: "{{ f5_user }}"
+   validate_certs: "{{ f5_validate_certs }}"
+  delegate_to: "{{ f5_delegate_to }}"
+  when: (f5_snmp_agent_authentication_traps is defined) and
+        (f5_snmp_agent_authentication_traps == 'enabled' or f5_snmp_agent_authentication_traps == 'disabled')
+  tags: set_snmp
+  notify: config sync
+
+- name: Set snmp agent status traps
+  bigip_snmp:
+   agent_status_traps: "{{ f5_snmp_agent_status_traps }}"
+   password: "{{ f5_passwd }}"
+   server: "{{ f5_host }}"
+   user: "{{ f5_user }}"
+   validate_certs: "{{ f5_validate_certs }}"
+  delegate_to: "{{ f5_delegate_to }}"
+  when: (f5_snmp_agent_status_traps is defined) and
+        (f5_snmp_agent_status_traps == 'enabled' or f5_snmp_agent_status_traps == 'disabled')
+  tags: set_snmp
+  notify: config sync
+
+- name: Set snmp device warning traps
+  bigip_snmp:
+   device_warning_traps: "{{ f5_snmp_device_warning_traps }}"
+   password: "{{ f5_passwd }}"
+   server: "{{ f5_host }}"
+   user: "{{ f5_user }}"
+   validate_certs: "{{ f5_validate_certs }}"
+  delegate_to: "{{ f5_delegate_to }}"
+  when: (f5_snmp_device_warning_traps is defined) and
+        (f5_snmp_device_warning_traps == 'enabled' or f5_snmp_device_warning_traps == 'disabled')
+  tags: set_snmp
+  notify: config sync
+
+- name: Remove defaut community
+  bigip_snmp_community: 
+   name: "{{ f5_snmp_default_community }}" 
+   state: absent
+   password: "{{ f5_passwd }}"
+   server: "{{ f5_host }}"
+   user: "{{ f5_user }}"
+   validate_certs: "{{ f5_validate_certs }}"
+  delegate_to: "{{ f5_delegate_to }}"
+  when: f5_snmp_rm_default_communities
+  tags: set_snmp
+  notify: config sync
+
+- name: Create snmp communities
+  bigip_snmp_community:
+   name: "{{ item.f5_snmp_community_name }}"
+   version: "{{ item.f5_snmp_community_version }}" 
+   snmp_username: "{{ item.f5_snmp_community_user }}"
+   snmp_auth_protocol: "{{ item.f5_snmp_community_auth_protocol }}"
+   snmp_auth_password: "{{ item.f5_snmp_community_user_passwd }}"
+   snmp_privacy_protocol: "{{ item.f5_snmp_community_privacy_protocol }}"
+   snmp_privacy_password: "{{ item.f5_snmp_privacy_passwd }}"
+   oid: "{{ item.f5_snmp_community_oid }}"
+   access: "{{ item.f5_snmp_community_access }}"
+   password: "{{ f5_passwd }}"
+   server: "{{ f5_host }}"
+   state: present
+   user: "{{ f5_user }}"
+   validate_certs: "{{ f5_validate_certs }}"
+  delegate_to: "{{ f5_delegate_to }}"
+  loop: "{{ f5_snmp_v3_communities }}"
+  when: (f5_snmp_v3_communities is defined) and
+        (f5_snmp_v3_communities | length) > 0
+  tags: set_snmp
+  notify: config sync

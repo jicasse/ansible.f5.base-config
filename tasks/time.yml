@@ -1,0 +1,27 @@
+---
+- name: Set ntp servers
+  bigip_device_ntp:
+   ntp_servers: "{{ f5_ntp_servers }}"
+   password: "{{ f5_passwd }}"
+   server: "{{ f5_host }}"
+   user: "{{ f5_user }}"
+   validate_certs: "{{ f5_validate_certs }}"
+   timezone: "{{ f5_timezone }}"
+  delegate_to: "{{ f5_delegate_to }}"
+  when: (f5_ntp_servers is defined) and
+        (f5_ntp_servers | length) > 0
+  tags: set_time
+  notify: config sync
+ 
+- name: Set timezone
+  bigip_device_ntp:
+   password: "{{ f5_passwd }}"
+   server: "{{ f5_host }}"
+   user: "{{ f5_user }}"
+   validate_certs: "{{ f5_validate_certs }}"
+   timezone: "{{ f5_timezone }}"
+  delegate_to: "{{ f5_delegate_to }}"
+  when: (f5_timezone is defined) and
+        (f5_timezone | length) > 0
+  tags: set_time
+  notify: config sync

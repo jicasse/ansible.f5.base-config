@@ -1,0 +1,11 @@
+[lab_env]
+f5_lab
+
+[prd_env]
+
+[f5_FR]
+f5_lab
+
+[all:children]
+lab_env
+prd_env

@@ -1,0 +1,39 @@
+---
+- name: Enable sshd banner
+  bigip_device_sshd:
+   banner: "{{ f5_sshd_banner_enabled }}"
+   password: "{{ f5_passwd }}"
+   server: "{{ f5_host }}"
+   user: "{{ f5_user }}"
+   validate_certs: "{{ f5_validate_certs }}"
+  delegate_to: "{{ f5_delegate_to }}"
+  when: (f5_sshd_banner_enabled is defined) and
+        (f5_sshd_banner_enabled == 'enabled' or f5_sshd_banner_enabled == 'disabled')
+  tags: set_sshd
+  notify: config sync
+
+- name: Set sshd banner text
+  bigip_device_sshd:
+   banner_text: "{{ f5_sshd_banner }}"
+   password: "{{ f5_passwd }}"
+   server: "{{ f5_host }}"
+   user: "{{ f5_user }}"
+   validate_certs: "{{ f5_validate_certs }}"
+  delegate_to: "{{ f5_delegate_to }}"
+  when: (f5_sshd_banner is defined) and
+        (f5_sshd_banner | length) > 0
+  tags: set_sshd
+  notify: config sync
+
+- name: Set sshd inactivity timeout
+  bigip_device_sshd:
+   inactivity_timeout: "{{ f5_sshd_inactivity_timeout }}"
+   password: "{{ f5_passwd }}"
+   server: "{{ f5_host }}"
+   user: "{{ f5_user }}"
+   validate_certs: "{{ f5_validate_certs }}"
+  delegate_to: "{{ f5_delegate_to }}"
+  when: (f5_sshd_inactivity_timeout is defined) and
+        (f5_sshd_inactivity_timeout | length) > 0
+  tags: set_sshd
+  notify: config sync

@@ -1,0 +1,13 @@
+---
+- name: Set bigip hostname
+  bigip_hostname:
+   hostname: "{{ f5_hostname }}"
+   password: "{{ f5_passwd }}"
+   server: "{{ f5_host }}"
+   user: "{{ f5_user }}"
+   validate_certs: "{{ f5_validate_certs }}"
+  delegate_to: "{{ f5_delegate_to }}"
+  when: (f5_hostname is defined) and
+        (f5_hostname | length) > 0
+  tags: set_hostname
+  notify: save config

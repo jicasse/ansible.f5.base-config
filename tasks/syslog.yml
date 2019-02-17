@@ -1,0 +1,31 @@
+---
+- name: Set syslog ltm logging levels
+  bigip_sys_db:
+   password: "{{ f5_passwd }}"
+   server: "{{ f5_host }}"
+   user: "{{ f5_user }}"
+   key: "{{ item.db_key }}"
+   value: "{{ item.level }}"
+   validate_certs: "{{ f5_validate_certs }}"
+  delegate_to: "{{ f5_delegate_to }}"
+  loop: "{{ f5_syslog_logging_levels }}"
+  when: f5_set_syslog_logging_levels and
+        (f5_syslog_logging_levels is defined) and
+        (f5_syslog_logging_levels | length) > 0
+  tags: set_syslog
+  notify: config sync
+
+- name: Set syslog remote servers
+  bigip_remote_syslog:
+   remote_host: "{{ item.remote_host }}"
+   remote_port: "{{ item.remote_port }}"
+   password: "{{ f5_passwd }}"
+   server: "{{ f5_host }}"
+   user: "{{ f5_user }}"
+   validate_certs: "{{ f5_validate_certs }}"
+  delegate_to: "{{ f5_delegate_to }}"
+  loop: "{{ f5_syslog_remote_servers }}"
+  when: (f5_syslog_remote_servers is defined) and
+        (f5_syslog_remote_servers | length) > 0
+  tags: set_syslog
+  notify: config sync

@@ -1,0 +1,18 @@
+---
+- name: Add management routes
+  bigip_management_route:
+   name: "{{ item.name }}"
+   description: "{{ item.description }}"
+   gateway: "{{ item.gateway }}"
+   network: "{{ item.network }}"
+   password: "{{ f5_passwd }}" 
+   server: "{{ f5_host }}"
+   state: present
+   user: "{{ f5_user }}"
+   validate_certs: "{{ f5_validate_certs }}"
+  delegate_to: "{{ f5_delegate_to }}"
+  loop: "{{ f5_management_routes }}"
+  when: (f5_management_routes is defined) and
+        (f5_management_routes | length) > 0
+  tags: set_mgmt_routes
+  notify: save config

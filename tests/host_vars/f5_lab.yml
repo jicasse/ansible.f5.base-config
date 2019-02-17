@@ -1,0 +1,22 @@
+---
+# Ansible connection type variable
+ansible_connection: local
+
+# BIGIP user used to manage the device using Ansible
+f5_user: api
+
+# BIGIP user's password used to maange the device using Ansible
+f5_passwd: password
+
+# BIGIP hostname
+f5_set_hostname: True
+f5_hostname: f5-lab1.j-sec.net
+
+# BIGIP IP address used to manage the device using Ansible
+f5_host: 1.1.1.1 
+
+# BIGIP device management routes
+f5_set_mgmt_routes: True
+f5_management_routes:
+ - { name: '2.2.2.2', description: 'radius', gateway: '1.1.1.254', network: '2.2.2.2/32' }
+ - { name: '3.3.3.3', description: 'dns', gateway: '1.1.1.254', network: '3.3.3.3/32' }

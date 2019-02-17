@@ -1,0 +1,72 @@
+---
+- name: Set proxy host
+  bigip_sys_db:
+   password: "{{ f5_passwd }}"
+   server: "{{ f5_host }}"
+   user: "{{ f5_user }}"
+   key: proxy.host
+   value: "{{ f5_proxy_host }}"
+   validate_certs: "{{ f5_validate_certs }}"
+  delegate_to: "{{ f5_delegate_to }}"
+  when: (f5_proxy_host is defined) and 
+        (f5_proxy_host | length) > 0
+  tags: set_proxy
+  notify: config sync
+
+- name: Set proxy port
+  bigip_sys_db:
+   password: "{{ f5_passwd }}"
+   server: "{{ f5_host }}"
+   user: "{{ f5_user }}"
+   key: proxy.port
+   value: "{{ f5_proxy_port }}"
+   validate_certs: "{{ f5_validate_certs }}"
+  delegate_to: "{{ f5_delegate_to }}"
+  when: (f5_proxy_port is defined) and 
+        (f5_proxy_port | length) > 0
+  tags: set_proxy
+  notify: config sync
+
+- name: Set proxy protocol
+  bigip_sys_db:
+   password: "{{ f5_passwd }}"
+   server: "{{ f5_host }}"
+   user: "{{ f5_user }}"
+   key: proxy.protocol
+   value: "{{ f5_proxy_protocol }}"
+   validate_certs: "{{ f5_validate_certs }}"
+  delegate_to: "{{ f5_delegate_to }}"
+  when: (f5_proxy_protocol is defined) and 
+        (f5_proxy_protocol | length) > 0
+  tags: set_proxy
+  notify: config sync
+
+- name: Set proxy username for proxy authentication
+  bigip_sys_db:
+   password: "{{ f5_passwd }}"
+   server: "{{ f5_host }}"
+   user: "{{ f5_user }}"
+   key: proxy.username
+   value: "{{ f5_proxy_username }}"
+   validate_certs: "{{ f5_validate_certs }}"
+  delegate_to: "{{ f5_delegate_to }}"
+  when: f5_proxy_authentication and
+        (f5_proxy_username is defined) and
+        (f5_proxy_username | length) > 0
+  tags: set_proxy
+  notify: config sync
+
+- name: Set proxy password for proxy authentication
+  bigip_sys_db:
+   password: "{{ f5_passwd }}"
+   server: "{{ f5_host }}"
+   user: "{{ f5_user }}"
+   key: proxy.password
+   value: "{{ f5_proxy_password }}"
+   validate_certs: "{{ f5_validate_certs }}"
+  delegate_to: "{{ f5_delegate_to }}"
+  when: f5_proxy_authentication and
+        (f5_proxy_password is defined) and 
+        (f5_proxy_password | length) > 0
+  tags: set_proxy
+  notify: config sync

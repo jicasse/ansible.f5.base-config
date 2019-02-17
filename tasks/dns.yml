@@ -1,0 +1,58 @@
+---
+- name: Set dns servers
+  bigip_device_dns:
+   name_servers: "{{ f5_dns_servers }}"
+   password: "{{ f5_passwd }}"
+   server: "{{ f5_host }}"
+   user: "{{ f5_user }}"
+   validate_certs: "{{ f5_validate_certs }}"
+   state: present
+   ip_version: "{{ f5_dns_ip_version }}"
+   cache: "{{ f5_dns_cache_status }}"
+  delegate_to: "{{ f5_delegate_to }}" 
+  when: (f5_dns_servers is defined) and
+        (f5_dns_servers | length) > 0
+  tags: set_dns
+  notify: config sync
+
+- name: Set dns ip version
+  bigip_device_dns:
+   password: "{{ f5_passwd }}"
+   server: "{{ f5_host }}"
+   user: "{{ f5_user }}"
+   validate_certs: "{{ f5_validate_certs }}"
+   state: present
+   ip_version: "{{ f5_dns_ip_version }}"
+  delegate_to: "{{ f5_delegate_to }}" 
+  when: (f5_dns_ip_version is defined) and
+        (f5_dns_ip_version | length) > 0
+  tags: set_dns
+  notify: config sync
+
+- name: Set dns caching configuration
+  bigip_device_dns:
+   password: "{{ f5_passwd }}"
+   server: "{{ f5_host }}"
+   user: "{{ f5_user }}"
+   validate_certs: "{{ f5_validate_certs }}"
+   state: present
+   cache: "{{ f5_dns_cache_status }}"
+  delegate_to: "{{ f5_delegate_to }}" 
+  when: (f5_dns_cache_status is defined) and
+        (f5_dns_cache_status | length) > 0
+  tags: set_dns
+  notify: config sync
+
+- name: Set dns search domains
+  bigip_device_dns:
+   search: "{{ f5_dns_search_domains }}"
+   password: "{{ f5_passwd }}"
+   server: "{{ f5_host }}"
+   user: "{{ f5_user }}"
+   validate_certs: "{{ f5_validate_certs }}"
+   state: present
+  delegate_to: "{{ f5_delegate_to }}"
+  when: (f5_dns_search_domains is defined) and
+        (f5_dns_search_domains | length) > 0
+  tags: set_dns
+  notify: config sync

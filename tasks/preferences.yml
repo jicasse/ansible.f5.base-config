@@ -1,0 +1,28 @@
+---
+- name: Set bigip preferences - records per screen
+  bigip_sys_db:
+   password: "{{ f5_passwd }}"
+   server: "{{ f5_host }}"
+   user: "{{ f5_user }}"
+   key: ui.system.preferences.recordsperscreen
+   value: "{{ f5_prefs_records_per_screen }}" 
+   validate_certs: "{{ f5_validate_certs }}"
+  delegate_to: "{{ f5_delegate_to }}"
+  when: (f5_prefs_records_per_screen is defined) and
+        (f5_prefs_records_per_screen | length) > 0
+  tags: set_prefs
+  notify: config sync
+
+- name: Set bigip preferences - set default view
+  bigip_sys_db:
+   password: "{{ f5_passwd }}"
+   server: "{{ f5_host }}"
+   user: "{{ f5_user }}"
+   key: ui.system.preferences.advancedselection
+   value: "{{ f5_prefs_default_view }}"
+   validate_certs: "{{ f5_validate_certs }}" 
+  delegate_to: "{{ f5_delegate_to }}"
+  when: (f5_prefs_default_view is defined) and
+        (f5_prefs_default_view | length) > 0
+  tags: set_prefs
+  notify: config sync

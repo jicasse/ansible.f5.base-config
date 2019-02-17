@@ -1,0 +1,40 @@
+---
+- import_tasks: hostname.yml
+  when: f5_set_hostname 
+  tags: set_hostname
+
+- import_tasks: dns.yml
+  when: f5_set_dns and (f5_ha_status == 'standalone' or (f5_ha_status == 'cluster' and f5_failover_state == 'active'))
+  tags: set_dns
+
+- import_tasks: time.yml
+  when: f5_set_time and (f5_ha_status == 'standalone' or (f5_ha_status == 'cluster' and f5_failover_state == 'active'))
+  tags: set_time
+
+- import_tasks: sshd.yml
+  when: f5_set_sshd and (f5_ha_status == 'standalone' or (f5_ha_status == 'cluster' and f5_failover_state == 'active'))
+  tags: set_sshd
+
+- import_tasks: preferences.yml
+  when: f5_set_prefs and (f5_ha_status == 'standalone' or (f5_ha_status == 'cluster' and f5_failover_state == 'active'))
+  tags: set_prefs
+
+- import_tasks: management_route.yml
+  when: f5_set_mgmt_routes
+  tags: set_mgmt_routes
+
+- import_tasks: snmp.yml
+  when: f5_set_snmp and (f5_ha_status == 'standalone' or (f5_ha_status == 'cluster' and f5_failover_state == 'active'))
+  tags: set_snmp
+
+- import_tasks: gui.yml
+  when: f5_set_gui and (f5_ha_status == 'standalone' or (f5_ha_status == 'cluster' and f5_failover_state == 'active'))
+  tags: set_gui
+
+- import_tasks: syslog.yml
+  when: f5_set_syslog and (f5_ha_status == 'standalone' or (f5_ha_status == 'cluster' and f5_failover_state == 'active'))
+  tags: set_syslog
+
+- import_tasks: proxy.yml
+  when: f5_set_proxy and (f5_ha_status == 'standalone' or (f5_ha_status == 'cluster' and f5_failover_state == 'active'))
+  tags: set_proxy

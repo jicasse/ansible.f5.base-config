@@ -1,0 +1,44 @@
+---
+# NTP servers for all BIGIP
+f5_set_time: True
+f5_ntp_servers: ['ntp.j-sec.net']
+
+# DNS settings for all BIGIP
+f5_set_dns: True
+f5_dns_search_domains: ['j-sec.net', 'domain.local']
+f5_dns_ip_version: '4'
+f5_dns_cache_status: 'disable'
+
+# Preferences for all BIGIP
+f5_set_prefs: True
+f5_prefs_records_per_screen: '100'
+f5_prefs_default_view: 'advanced'
+
+# httpd and gui settings for all BIGIP
+f5_set_gui: True
+f5_gui_auth_realm: 'MY LAB'
+f5_gui_idle_timeout: '900'
+f5_gui_authorized_subnets: 'all'
+f5_gui_banner: '### MY HTTP BANNER ###'
+f5_console_timeout: '900'
+f5_gui_ssl_ciphers_suite: 'ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-SHA:AES256-SHA256'
+f5_gui_ssl_protocols: 'all -SSLv2 -SSLv3 -TLSv1'
+
+# SSHD parameters for all BIGIP
+f5_set_sshd: True
+f5_sshd_banner_enabled: 'enabled'
+f5_sshd_banner: '### MY BANNER ###'
+f5_sshd_inactivity_timeout: '900'
+
+# SNMP parameters for all BIGIP
+f5_set_snmp: True
+f5_snmp_contact: 'Network Team'
+f5_snmp_allowed_addresses: ['127.0.0.0/8', '1.1.1.1']
+f5_snmp_agent_authentication_traps: 'disabled'
+f5_snmp_agent_status_traps: 'disabled'
+f5_snmp_device_warning_traps: 'disabled'
+f5_snmp_v3_communities:
+ - { f5_snmp_community_name: 'mycommunity', f5_snmp_community_version: 'v3', f5_snmp_community_user: 'snmpuser', f5_snmp_community_user_passwd: 'secret1234', f5_snmp_community_auth_protocol: 'sha', f5_snmp_community_privacy_protocol: 'aes', f5_snmp_privacy_passwd: 'secret1234', f5_snmp_community_oid: '.1', f5_snmp_community_access: 'rw' }
+
+# SYSLOG parameters for all BIGIP
+f5_set_syslog_logging_levels: True

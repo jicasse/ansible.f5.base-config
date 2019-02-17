@@ -1,0 +1,36 @@
+---
+
+# DNS servers list
+f5_dns_servers: ['2.2.2.2']
+
+# SNMP location
+f5_snmp_location: 'France'
+
+# Timezone
+f5_timezone: 'Europe/Paris'
+
+# Remote syslog servers list
+f5_set_syslog: True
+f5_syslog_remote_servers:
+ - { remote_host: '1.1.1.1', remote_port: '1234' }
+f5_set_syslog_logging_levels: True
+f5_syslog_logging_levels: 
+ - { db_key: 'log.arp.level', level: 'Warning' }
+ - { db_key: 'log.http.level', level: 'Error' }
+ - { db_key: 'log.deflate.level', level: 'Error' }
+ - { db_key: 'log.ip.level', level: 'Warning' }
+ - { db_key: 'log.layer4.level', level: 'Notice' }
+ - { db_key: 'log.mcpd.level', level: 'info' }
+ - { db_key: 'log.net.level', level: 'Warning' }
+ - { db_key: 'log.rules.level', level: 'Informational' }
+ - { db_key: 'log.ssl.level', level: 'Warning' }
+ - { db_key: 'log.tmm.level', level: 'Notice' }
+ - { db_key: 'log.lind.level', level: 'Notice' }
+ - { db_key: 'log.csyncd.level', level: 'Notice' }
+
+# Proxy settings
+f5_set_proxy: True
+f5_proxy_host: 'proxy.j-sec.net'
+f5_proxy_port: '3128'
+f5_proxy_protocol: 'http'
+f5_proxy_authentication: False
