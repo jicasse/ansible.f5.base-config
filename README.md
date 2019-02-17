@@ -1,7 +1,8 @@
 F5 BIGIP system configuration hardening
 =========
 
-The objective of this role is to proceed to the system and network configuration and apply a configuration hardening of BIGIP appliances.
+The objective of this role is to proceed to a base system configuration.
+The idea here is to be able to apply a standard, an hardened configuration for all managed BIGIP devices.
 
 Requirements
 ------------
